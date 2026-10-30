@@ -130,7 +130,6 @@
 	}
 
 	function showShortCutLabels() {
-		//document.getElementById('shortCutLabels').style.display = 'block';
 		document.getElementById('SC1').style.display = 'block';
 		document.getElementById('SC2').style.display = 'block';
 		document.getElementById('SC3').style.display = 'block';
@@ -193,8 +192,6 @@
 		prepareRestore(file);
 		player.src = file;
 		player.pause();
-		//player.type = 'video/mp4'; only use this if the file is of type mp4
-		//player.load();
 
 		// update current medium label
 		const currentMediumLabel = document.getElementById("currentMedium");
@@ -219,10 +216,8 @@
 		prepareRestore(file.name + "|" + file.size);
 		player.src = url;
 		player.load();
-		// player.play();
 
 		// update current medium label
-		// player.src = file;
 		const currentMediumLabel = document.getElementById("currentMedium");
 		currentMediumLabel.innerText = file.name;
 		player.playbackRate = 1;

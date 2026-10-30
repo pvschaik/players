@@ -59,6 +59,7 @@ function openS() {
 
         function loadAudio(file) {
 		const player = document.getElementById("mediaPlayer");
+		prepareRestore(file);
 		player.src = file;
 		player.pause();		//player.load();
 		document.getElementById("mediaPlayer").playbackRate = 1;
@@ -199,6 +200,7 @@ function openS() {
 			}
 
 		player._objectURL = url;
+		prepareRestore(file.name + "|" + file.size);
 		player.src = url;
 		player.load();
 		// player.play();
@@ -231,3 +233,62 @@ function openS() {
 		const updatedVolume = Math.min(1.0, Math.max(0.0, currentVolume + pChange));
 		mediaPlayer.volume = updatedVolume;
 	}
+
+
+
+
+
+// ---- Remembered playback position ----
+let pendingKey = null;   // key of the medium being loaded
+let currentKey = null;   // key of the medium whose position is being saved
+let lastSaveTime = 0;
+
+function savePosition() {
+	if (!currentKey) return;
+	const player = document.getElementById("mediaPlayer");
+	try {
+		localStorage.setItem("pos:" + currentKey, player.currentTime);
+	} catch (e) { /* storage unavailable: ignore */ }
+}
+
+function prepareRestore(key) {
+	savePosition();        // save the old medium's position first
+	currentKey = null;     // pause saving until the new medium has loaded
+	pendingKey = key;
+}
+
+const mediaPlayer = document.getElementById("mediaPlayer");
+
+mediaPlayer.addEventListener("loadedmetadata", function () {
+	if (!pendingKey) return;
+	let saved = 0;
+	try {
+		saved = parseFloat(localStorage.getItem("pos:" + pendingKey));
+	} catch (e) {}
+	// Restore only if valid and not within 5 s of the end
+	if (isFinite(saved) && saved > 0 && saved < mediaPlayer.duration - 5) {
+		mediaPlayer.currentTime = saved;
+	}
+	currentKey = pendingKey;
+	pendingKey = null;
+});
+
+// Save about every 2 seconds while playing, and on pause
+mediaPlayer.addEventListener("timeupdate", function () {
+	const now = Date.now();
+	if (now - lastSaveTime > 2000) {
+		lastSaveTime = now;
+		savePosition();
+	}
+});
+mediaPlayer.addEventListener("pause", savePosition);
+
+// Finished: forget the position so it starts from 0 next time
+mediaPlayer.addEventListener("ended", function () {
+	if (!currentKey) return;
+	try { localStorage.removeItem("pos:" + currentKey); } catch (e) {}
+});
+
+// Save when the tab is closed or reloaded
+window.addEventListener("pagehide", savePosition);
+
