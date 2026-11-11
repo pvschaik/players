@@ -50,23 +50,26 @@
 
 	  <table class="center-table" cellspacing="0" cellpadding="0">
 	    <tr id = "shortCutSpeedLabels">
-  			  <td></td>
-  			  <td></td>
-  			  <td><label class = "shortCut" id = "SpeedPlus1">Ctrl + 1</label>  </td>
-	        <td><label class = "shortCut" id = "SpeedPlus10">Ctrl + 2</label> </td>
-	        <td><label class = "shortCut" id = "SpeedMinus1">Ctrl + 3</label> </td>
-	        <td><label class = "shortCut" id = "SpeedMinus10">Ctrl + 4</label></td>
+			<td></td>
+    			<td><label class = "shortCut" id = "SC9">Alt + 9</label></td>
+    			<td><label class = "shortCut" id = "SC0">Alt + 0</label></td>
+  			<td></td>
+  			<td></td>
+  			<td><label class = "shortCut" id = "SpeedPlus1">Ctrl + 1</label>  </td>
+	        	<td><label class = "shortCut" id = "SpeedPlus10">Ctrl + 2</label> </td>
+	        	<td><label class = "shortCut" id = "SpeedMinus1">Ctrl + 3</label> </td>
+	       		<td><label class = "shortCut" id = "SpeedMinus10">Ctrl + 4</label></td>
 	    </tr>
-	    <tr style = "cursor: pointer" onmouseover = "showShortCutLabelsSpeed();" onmouseout = "hideShortCutLabelsSpeed();">
+	    <tr style = "cursor: pointer" onmouseover = "showShortCutLabelsSpeed();" 
+						onmouseout = "hideShortCutLabelsSpeed();">
 	      <!-- <span > -->
-          <td>	      
-	      		<label>Volume: </label>
-		          <button class = "forward" id = "bVolumeUp" onclick="changeVolume(0.1);" accesskey="9">
-				        +<u>/9</u></button>
-	          	<button class = "back" id = "bVolumeDown" onclick="changeVolume(-0.1);" accesskey="0">
-				        -<u>/0</u></button>
-          </td>
-	        <td><label>Speed: </label>&nbsp<label id="currentSpeed">100%</label></td>
+        	<td><label>Volume: </label></td>
+		<td><button class = "forward" id = "bVolumeUp" onclick="changeVolume(0.1);" accesskey="9">
+				        +<u>/9</u></button></td>
+	        <td><button class = "back" id = "bVolumeDown" onclick="changeVolume(-0.1);" accesskey="0">
+				        -<u>/0</u></button></td>
+	        <td><label>Speed: </label></td>
+		<td><label id="currentSpeed">100%</label></td>
 	        <td><button class="forward" id = "bSpeedPlus1" onclick="changePlaybackSpeed(0.01);">+1%
 				</button></td>
 	        <td><button class="forward" id = "bSpeedPlus10" onclick="changePlaybackSpeed(0.10);">+10%

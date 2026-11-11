@@ -162,6 +162,8 @@ function openS() {
 	}
 
 	function showShortCutLabelsSpeed() {
+		document.getElementById('SC9').style.display = 'block';
+		document.getElementById('SC0').style.display = 'block';
 		document.getElementById('SpeedPlus1').style.display = 'block';
 		document.getElementById('SpeedPlus10').style.display = 'block';
 		document.getElementById('SpeedMinus1').style.display = 'block';
@@ -181,6 +183,8 @@ function openS() {
 	}
 
 	function hideShortCutLabelsSpeed() {
+		document.getElementById('SC9').style.display = 'none';
+		document.getElementById('SC0').style.display = 'none';
 		document.getElementById('SpeedPlus1').style.display = 'none';
 		document.getElementById('SpeedPlus10').style.display = 'none';
 		document.getElementById('SpeedMinus1').style.display = 'none';
